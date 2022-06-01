@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "4d58d58a-a9d6-4270-be10-1519f8bddcec",
+		"name": "grover",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "meta",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5002/meta",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"meta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Oscar\",\n    \"password\": \"Abc123\",\n    \"email\": \"oscar@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5002/user/register",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n     \"email\": \"user1@oscar.com\",\n    \"password\": \"Abc123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5002/user/login",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Oscar\",\n    \"password\": \"Abc123\",\n    \"email\": \"oscar@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5002/user/register",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getuser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkFHSHhZQiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjUzNzI2MzAzLCJleHAiOjE2NTU3OTk5MDN9.ma1vRVUMikdp8ME5gvvrLuduuutLOfwoIgyqJhxUCBg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Oscar\",\n    \"password\": \"Abc123\",\n    \"email\": \"oscar@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5002/user/user1@oscar.com",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"user",
+						"user1@oscar.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getuserAll",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRIY2ZRdCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY1NDA3MTE4NywiZXhwIjoxNjU2MTQ0Nzg3fQ.M1yClIfgzF1csykzgDVRIADbIAoEZu18d-PASnOgE6k",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5002/user/all",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"user",
+						"all"
+					],
+					"query": [
+						{
+							"key": "authorization",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNmI5OGMwMzczMDA3NjUwOGRkYzdhMyIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY1MTIxODYzMiwiZXhwIjoxNjUzMjkyMjMyfQ.tSW7feOXkQKlQSYuXS37h0SqrJD3YO5HJMqdDPPkoSg",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"admin@oscar.com\",\n    \"password\": \"Abc123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5002/user/login",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user create account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkFHSHhZQiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjUzODQ4NjYwLCJleHAiOjE2NTU5MjIyNjB9.KCyewt6HfuhbD7E863IoJR5IrAdTDjV5McIdii4AK5I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"currency\": \"EUR\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5002/account/register",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"account",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all accounts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkFHSHhZQiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjUzOTc5MjM1LCJleHAiOjE2NTYwNTI4MzV9.Ic7wC1haSMmUz2g_kOAMsVWiojww_sctOZAcOVZjFSw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Oscar\",\n    \"password\": \"Abc123\",\n    \"email\": \"oscar@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5002/account/list",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"account",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get account",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkFHSHhZQiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjUzOTc5MjM1LCJleHAiOjE2NTYwNTI4MzV9.Ic7wC1haSMmUz2g_kOAMsVWiojww_sctOZAcOVZjFSw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5002/account/EUR",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"account",
+						"EUR"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post transaction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkFHSHhZQiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjUzODE5NDAyLCJleHAiOjE2NTU4OTMwMDJ9.hBnVy6Z5fbsLqTKgeQBOxA4nJqJxz_x8l7sIFrvp-ag",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"currency\": \"EUR\",\n    \"amount\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5002/transaction",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
