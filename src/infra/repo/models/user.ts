@@ -1,15 +1,7 @@
 import { Collection } from "mongodb";
 import { Database } from "../index";
-import { Model } from ".";
+import { User } from ".";
 import { Logger } from "../../../utils";
-
-export interface User extends Model {
-  name: string;
-  email: string;
-  password: string;
-  role: string;
-  userId: string;
-}
 
 export const UserRepo = (() => {
   let instance: Collection<User>;

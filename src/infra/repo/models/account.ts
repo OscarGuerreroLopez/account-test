@@ -1,14 +1,7 @@
 import { Collection } from "mongodb";
 import { Database } from "../index";
-import { Model } from ".";
+import { Account } from ".";
 import { Logger } from "../../../utils";
-
-export interface Account extends Model {
-  accountId: string;
-  userId: string;
-  currency: string;
-  balance: number;
-}
 
 export const AccountRepo = (() => {
   let instance: Collection<Account>;
