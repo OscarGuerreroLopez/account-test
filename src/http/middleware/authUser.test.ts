@@ -43,7 +43,6 @@ describe("Auth user middleware tests", () => {
   let status: any;
 
   beforeAll(async () => {
-    await TestConnection.createConnection();
     await LoadMethods();
     await AddUsers();
   }, 120000);

@@ -56,7 +56,6 @@ const resetAccount = async () => {
 
 describe("AddUserTransaction", () => {
   beforeAll(async () => {
-    await TestConnection.createConnection();
     await LoadMethods();
     await AddUsers();
     await AddTestAccount();

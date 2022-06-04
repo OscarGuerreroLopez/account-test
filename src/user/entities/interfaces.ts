@@ -10,7 +10,6 @@ export interface UserEntity {
   getName: () => string;
   getEmail: () => string;
   getPassword: () => string;
-  getId: () => string;
   getRole: () => string;
   getUserId: () => string;
 }

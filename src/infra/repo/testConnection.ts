@@ -49,7 +49,6 @@ export const TestConnection = (() => {
       }
 
       return true;
-    },
-    createConnection
+    }
   };
 })();

@@ -5,7 +5,7 @@ import helmet from "helmet";
 import * as middleware from "./http/middleware";
 import Router from "./http/router";
 import { EnvVars, Logger } from "./utils";
-import { Database, LoadMethods, AddAdminUser, AddUsers } from "./infra/repo";
+import { LoadMethods, AddAdminUser, AddUsers } from "./infra/repo";
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -55,7 +55,6 @@ process.on("unhandledRejection", (e: any) => {
 });
 
 app.listen(EnvVars.PORT, async () => {
-  await Database.createConnection();
   await LoadMethods();
   await AddAdminUser();
   await AddUsers();

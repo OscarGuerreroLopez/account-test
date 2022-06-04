@@ -24,7 +24,7 @@ export const MakeLoginUser = ({
 
     const user = userExists[0];
 
-    if (!user._id) {
+    if (!user.userId) {
       throw Error(`Missing id for the user ${user.email}`);
     }
 

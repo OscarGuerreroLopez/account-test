@@ -33,7 +33,6 @@ describe("Register handler", () => {
   let status: any;
 
   beforeAll(async () => {
-    await TestConnection.createConnection();
     await LoadMethods();
   }, 120000);
 

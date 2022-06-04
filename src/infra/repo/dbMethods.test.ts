@@ -3,7 +3,6 @@ import { TestConnection, User } from ".";
 
 describe("DB methods test", () => {
   beforeAll(async () => {
-    await TestConnection.createConnection();
     await LoadMethods();
   }, 120000);
 
