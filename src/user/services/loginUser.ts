@@ -7,8 +7,13 @@ export const MakeLoginUser = ({
   comparePassword,
   makeToken
 }: MakeLoginUserParams): LoginUser => {
-  const loginUser = async ({ email, password }: LoginUserParams) => {
-    if (!email || !password) {
+  const loginUser = async ({
+    email,
+    password,
+    userAgent,
+    clientIp
+  }: LoginUserParams) => {
+    if (!email || !password || !userAgent || !clientIp) {
       throw Error("User params not supplied");
     }
 
@@ -36,7 +41,9 @@ export const MakeLoginUser = ({
 
     const token = makeToken({
       id: user.userId,
-      role: user.role
+      role: user.role,
+      userAgent,
+      clientIp
     });
     return token;
   };

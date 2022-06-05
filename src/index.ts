@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import requestIp from "request-ip";
 
 import * as middleware from "./http/middleware";
 import Router from "./http/router";
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use(cors({ credentials: true, origin: true }));
 app.use(helmet());
+app.use(requestIp.mw());
 
 app.use(middleware.LoggerMiddleware);
 app.use("/", Router);

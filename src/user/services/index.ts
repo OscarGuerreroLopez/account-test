@@ -13,6 +13,7 @@ const comparePassword = buildPassword.comparePassword;
 const makeToken = buildJwt.makeToken;
 
 export const AddUser = MakeAddUser(DbMethods, makePassword);
+
 export const FindUserByEMail = MakeFindUser(
   DbMethods,
   removePassword
@@ -22,10 +23,12 @@ export const FindUserByUserId = MakeFindUser(
   DbMethods,
   removePassword
 ).findUserByUserId;
+
 export const FindAllUsers = MakeFindUser(
   DbMethods,
   removePassword
 ).findAllUsers;
+
 export const LoginUser = MakeLoginUser({
   repo: DbMethods,
   comparePassword,

@@ -28,5 +28,7 @@ export interface MakeLoginUserParams {
 export interface LoginUserParams {
   email: string;
   password: string;
+  userAgent: string;
+  clientIp: string;
 }
 export type LoginUser = (params: LoginUserParams) => Promise<string>;
