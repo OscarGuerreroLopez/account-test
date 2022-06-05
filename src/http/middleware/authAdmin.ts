@@ -24,6 +24,13 @@ export const AdminAuthMiddleware = async (
       throw Error(`User ${decoded.id} tried to execute an admin route`);
     }
 
+    const userAgent = request.headers["user-agent"];
+    const clientIp = request.clientIp;
+
+    if (decoded.userAgent !== userAgent || decoded.clientIp !== clientIp) {
+      throw Error(`User ${decoded.id} has changed location`);
+    }
+
     const user = await FindUserByUserId(decoded.id);
     request.user = user;
 

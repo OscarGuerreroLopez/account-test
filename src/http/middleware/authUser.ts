@@ -33,12 +33,14 @@ export const UserAuthMiddleware = async (
       );
     }
 
-    request.user = {
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      userId: user.userId
-    };
+    const userAgent = request.headers["user-agent"];
+    const clientIp = request.clientIp;
+
+    if (decoded.userAgent !== userAgent || decoded.clientIp !== clientIp) {
+      throw Error(`User ${decoded.id} has changed location`);
+    }
+
+    request.user = user;
 
     next();
   } catch (error) {
