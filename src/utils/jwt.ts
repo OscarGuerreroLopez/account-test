@@ -11,7 +11,7 @@ export interface MakeJwt {
 export const BuildMakeVerifyJwt = (() => {
   const secret = EnvVars.SECRET;
 
-  let instance: MakeJwt | null = null;
+  let instance: MakeJwt;
 
   const createInstance = () => {
     const makeToken = (data: TokenPayload) => {

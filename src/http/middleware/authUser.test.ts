@@ -28,12 +28,16 @@ const buildJwt = BuildMakeVerifyJwt.getInstance();
 const makeToken = buildJwt.makeToken;
 const goodToken = makeToken({
   id: "AGHxYB",
-  role: "User"
+  role: "User",
+  userAgent: "fake userAgent",
+  clientIp: "123.11.22.33"
 });
 
 const badToken = makeToken({
   id: "AAaaa1234",
-  role: "User"
+  role: "User",
+  userAgent: "fake userAgent",
+  clientIp: "123.11.22.33"
 });
 
 describe("Auth user middleware tests", () => {
@@ -62,9 +66,11 @@ describe("Auth user middleware tests", () => {
   it("should get the right user in the request.user", async () => {
     const req = {
       headers: {
-        authorization: goodToken
+        authorization: goodToken,
+        ["user-agent"]: "fake userAgent"
       },
-      code: uuid
+      code: uuid,
+      clientIp: "123.11.22.33"
     };
     request = mockReq(req);
 

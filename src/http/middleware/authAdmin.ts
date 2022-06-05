@@ -16,11 +16,24 @@ export const AdminAuthMiddleware = async (
       throw Error("missing token");
     }
 
-    const decodeToken = BuildMakeVerifyJwt.getInstance();
+    const jwtInstance = BuildMakeVerifyJwt.getInstance();
 
-    const decoded = decodeToken.verifyToken(token);
+    const decoded = jwtInstance.verifyToken(token);
 
-    if (decoded.role !== "Admin") {
+    const user = await FindUserByUserId(decoded.id);
+
+    if (Object.keys(user).length === 0) {
+      throw Error(`User ${decoded.id} does not exist in DB`);
+    }
+
+    // in case user role has chnaged since token creation
+    if (decoded.role !== user.role) {
+      throw Error(
+        `user in the token has role ${decoded.role} and in the DB ${user.role} `
+      );
+    }
+
+    if (user.role !== "Admin") {
       throw Error(`User ${decoded.id} tried to execute an admin route`);
     }
 
@@ -31,8 +44,12 @@ export const AdminAuthMiddleware = async (
       throw Error(`User ${decoded.id} has changed location`);
     }
 
-    const user = await FindUserByUserId(decoded.id);
-    request.user = user;
+    request.user = {
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      userId: user.userId
+    };
 
     next();
   } catch (error) {

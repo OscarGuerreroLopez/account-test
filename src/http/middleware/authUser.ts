@@ -40,7 +40,12 @@ export const UserAuthMiddleware = async (
       throw Error(`User ${decoded.id} has changed location`);
     }
 
-    request.user = user;
+    request.user = {
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      userId: user.userId
+    };
 
     next();
   } catch (error) {
