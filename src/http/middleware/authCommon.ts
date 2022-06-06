@@ -1,14 +1,20 @@
 import { FindUserByUserIdType } from "../../user/services";
 import { VerifyTokenType } from "../../utils";
 
+export type AuthCommonType = (
+  token?: string,
+  userAgent?: string | undefined,
+  clientIp?: string | undefined
+) => Promise<RequestUser>;
+
 export const AuthCommon = (
   verifyToken: VerifyTokenType,
   findUserByUserId: FindUserByUserIdType
-) => {
+): AuthCommonType => {
   return async (
-    token: string,
-    userAgent: string | undefined,
-    clientIp: string | undefined
+    token?: string,
+    userAgent?: string,
+    clientIp?: string
   ): Promise<RequestUser> => {
     if (!token) {
       throw Error("missing token");

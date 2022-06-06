@@ -1,9 +1,11 @@
 import { mockReq, mockRes } from "sinon-express-mock";
 import * as winston from "winston";
-import { UserAuthMiddleware } from "./authUser";
+import { MakeAuthUserMiddleware } from "./authUser";
 import { LoadMethods, TestConnection } from "../../infra/repo";
-import { BuildMakeVerifyJwt } from "../../utils";
+import { BuildMakeVerifyJwt, VerifyToken } from "../../utils";
 import { AddUsers } from "../../infra/repo";
+import { AuthCommon } from "./authCommon";
+import { FindUserByUserId } from "../../user";
 
 // Avoid writing to logs during testing
 jest.mock("../../utils/logger.ts", () => {
@@ -39,6 +41,9 @@ const badToken = makeToken({
   userAgent: "fake userAgent",
   clientIp: "123.11.22.33"
 });
+
+const authCommon = AuthCommon(VerifyToken, FindUserByUserId);
+const UserAuthMiddleware = MakeAuthUserMiddleware(authCommon);
 
 describe("Auth user middleware tests", () => {
   const next = () => null;
