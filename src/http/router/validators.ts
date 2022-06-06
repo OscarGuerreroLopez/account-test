@@ -1,4 +1,4 @@
-import { body, param } from "express-validator";
+import { body } from "express-validator";
 
 export const UserValidator = [
   body("name").exists().withMessage("missing name"),
