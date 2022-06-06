@@ -1,4 +1,4 @@
-import { body, param } from "express-validator";
+import { body } from "express-validator";
 
 export const UserValidator = [
   body("name").exists().withMessage("missing name"),
@@ -20,13 +20,6 @@ export const UserLoginValidator = [
     .matches(/^(?=.*?\d)(?=.*?[a-zA-Z])[a-zA-Z\d]+$/)
     .withMessage("missing or not valid password"),
   body("email")
-    .exists()
-    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)
-    .withMessage("missing or invalid email")
-];
-
-export const GetUserValidator = [
-  param("email")
     .exists()
     .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)
     .withMessage("missing or invalid email")

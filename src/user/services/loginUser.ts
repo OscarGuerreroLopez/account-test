@@ -5,10 +5,15 @@ import { LoginUser, LoginUserParams, MakeLoginUserParams } from "./interfaces";
 export const MakeLoginUser = ({
   repo,
   comparePassword,
-  makeToken
+  MakeToken
 }: MakeLoginUserParams): LoginUser => {
-  const loginUser = async ({ email, password }: LoginUserParams) => {
-    if (!email || !password) {
+  const loginUser = async ({
+    email,
+    password,
+    userAgent,
+    clientIp
+  }: LoginUserParams) => {
+    if (!email || !password || !userAgent || !clientIp) {
       throw Error("User params not supplied");
     }
 
@@ -24,7 +29,7 @@ export const MakeLoginUser = ({
 
     const user = userExists[0];
 
-    if (!user._id) {
+    if (!user.userId) {
       throw Error(`Missing id for the user ${user.email}`);
     }
 
@@ -34,9 +39,11 @@ export const MakeLoginUser = ({
       throw Error(`User with email ${email} wrong password`);
     }
 
-    const token = makeToken({
+    const token = MakeToken({
       id: user.userId,
-      role: user.role
+      role: user.role,
+      userAgent,
+      clientIp
     });
     return token;
   };

@@ -7,7 +7,9 @@ export const FindAllAccounts: Handler = async (
   response: Response
 ) => {
   try {
-    const result = await FindAllAccountsService(request.user.userId);
+    const { userId } = request.user;
+
+    const result = await FindAllAccountsService(userId);
 
     return response.status(200).send(result);
   } catch (error) {

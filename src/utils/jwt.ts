@@ -1,17 +1,17 @@
 import jwt from "jsonwebtoken";
 import { EnvVars } from "./";
 
-export type MakeToken = (data: TokenPayload) => string;
-export type VerifyToken = (token: string) => TokenPayload;
+export type MakeTokenType = (data: TokenPayload) => string;
+export type VerifyTokenType = (token: string) => TokenPayload;
 export interface MakeJwt {
-  makeToken: MakeToken;
-  verifyToken: VerifyToken;
+  makeToken: MakeTokenType;
+  verifyToken: VerifyTokenType;
 }
 
 export const BuildMakeVerifyJwt = (() => {
   const secret = EnvVars.SECRET;
 
-  let instance: MakeJwt | null = null;
+  let instance: MakeJwt;
 
   const createInstance = () => {
     const makeToken = (data: TokenPayload) => {

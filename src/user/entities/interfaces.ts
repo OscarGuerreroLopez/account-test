@@ -1,5 +1,4 @@
 export interface User {
-  _id?: string;
   name: string;
   email: string;
   password: string;
@@ -11,7 +10,6 @@ export interface UserEntity {
   getName: () => string;
   getEmail: () => string;
   getPassword: () => string;
-  getId: () => string;
   getRole: () => string;
   getUserId: () => string;
 }

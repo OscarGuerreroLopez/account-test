@@ -4,7 +4,13 @@ import { LoginUser } from "../../../user";
 
 export const Login: Handler = async (request: Request, response: Response) => {
   try {
-    const token = await LoginUser(request.body);
+    const params = {
+      ...request.body,
+      userAgent: request.headers["user-agent"],
+      clientIp: request.clientIp
+    };
+
+    const token = await LoginUser(params);
 
     if (!token) {
       throw Error("Error login check logs");

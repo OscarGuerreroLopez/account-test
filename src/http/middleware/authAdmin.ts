@@ -1,44 +1,50 @@
 import { Request, Response, NextFunction } from "express";
-import { BuildMakeVerifyJwt, ErrorHandler, Severity } from "../../utils";
-import { FindUserByUserId } from "../../user";
+import { ErrorHandler, Severity } from "../../utils";
 
-export const AdminAuthMiddleware = async (
+import { AuthCommonType } from "./authCommon";
+
+export const MakeAuthAdminMiddleware = (
+  authCommon: AuthCommonType
+): ((
   request: Request,
   response: Response,
   next: NextFunction
-): Promise<void> => {
-  const code = request.code;
+) => Promise<void>) => {
+  const adminAuthMiddleware = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    const code = request.code;
 
-  try {
-    const token = request.headers.authorization;
+    try {
+      const token = request.headers.authorization;
+      const userAgent = request.headers["user-agent"];
+      const clientIp = request.clientIp;
 
-    if (!token) {
-      throw Error("missing token");
-    }
+      request.user = await authCommon(token, userAgent, clientIp);
 
-    const decodeToken = BuildMakeVerifyJwt.getInstance();
-
-    const decoded = decodeToken.verifyToken(token);
-
-    if (decoded.role !== "Admin") {
-      throw Error(`User ${decoded.id} tried to execute an admin route`);
-    }
-
-    const user = await FindUserByUserId(decoded.id);
-    request.user = user;
-
-    next();
-  } catch (error) {
-    ErrorHandler({
-      error,
-      additionalErrorInfo: {
-        severity: Severity.WARN,
-        identifier: "Auth Middleware",
-        code: request.code,
-        body: request.body,
-        headers: request.headers
+      if (request.user.role !== "Admin") {
+        throw Error(
+          `User ${request.user.userId} tried to execute an admin route`
+        );
       }
-    });
-    response.status(401).send({ message: "Not Authorized", code });
-  }
+
+      next();
+    } catch (error) {
+      ErrorHandler({
+        error,
+        additionalErrorInfo: {
+          severity: Severity.WARN,
+          identifier: "Auth Middleware",
+          code: request.code,
+          body: request.body,
+          headers: request.headers
+        }
+      });
+      response.status(401).send({ message: "Not Authorized", code });
+    }
+  };
+
+  return adminAuthMiddleware;
 };

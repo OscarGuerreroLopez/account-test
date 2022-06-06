@@ -1,17 +1,7 @@
 import { Collection } from "mongodb";
 import { Database } from "../index";
-import { Model } from ".";
+import { Transaction } from "../";
 import { Logger } from "../../../utils";
-
-export interface Transaction extends Model {
-  transactionId: string;
-  accountId: string;
-  userId: string;
-  currency: string;
-  amount: number;
-  prevBalance: number;
-  newBalance: number;
-}
 
 export const TransactionRepo = (() => {
   let instance: Collection<Transaction>;

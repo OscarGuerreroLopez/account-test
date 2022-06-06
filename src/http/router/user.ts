@@ -1,10 +1,6 @@
 import { Router } from "express";
 import asyncHandler from "express-async-handler";
-import {
-  UserValidator,
-  GetUserValidator,
-  UserLoginValidator
-} from "./validators";
+import { UserValidator, UserLoginValidator } from "./validators";
 import {
   AdminAuthMiddleware,
   ValidatorMiddleware,
@@ -30,12 +26,6 @@ router.post(
 
 router.get("/all", AdminAuthMiddleware, asyncHandler(GetAllUsers));
 
-router.get(
-  "/:email",
-  GetUserValidator,
-  ValidatorMiddleware,
-  UserAuthMiddleware,
-  asyncHandler(GetUser)
-);
+router.get("/", ValidatorMiddleware, UserAuthMiddleware, asyncHandler(GetUser));
 
 export default router;

@@ -1,11 +1,12 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import requestIp from "request-ip";
 
 import * as middleware from "./http/middleware";
 import Router from "./http/router";
 import { EnvVars, Logger } from "./utils";
-import { Database, LoadMethods, AddAdminUser, AddUsers } from "./infra/repo";
+import { LoadMethods, AddAdminUser, AddUsers } from "./infra/repo";
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use(cors({ credentials: true, origin: true }));
 app.use(helmet());
+app.use(requestIp.mw());
 
 app.use(middleware.LoggerMiddleware);
 app.use("/", Router);
@@ -55,7 +57,6 @@ process.on("unhandledRejection", (e: any) => {
 });
 
 app.listen(EnvVars.PORT, async () => {
-  await Database.createConnection();
   await LoadMethods();
   await AddAdminUser();
   await AddUsers();

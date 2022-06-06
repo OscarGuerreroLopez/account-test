@@ -22,5 +22,14 @@ declare global {
   interface TokenPayload {
     id: string;
     role: string;
+    userAgent: string;
+    clientIp: string;
   }
+
+  type RequestUser = {
+    name: string;
+    email: string;
+    role: string;
+    userId: string;
+  };
 }

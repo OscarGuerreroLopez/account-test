@@ -27,7 +27,6 @@ export const BuildMakeUser = (buildMakeUser: BuildMakeUserParams): MakeUser => {
       getName: () => user.name,
       getEmail: () => user.email,
       getPassword: () => user.password,
-      getId: () => user._id || "",
       getRole: () => user.role,
       getUserId: () => user.userId
     });

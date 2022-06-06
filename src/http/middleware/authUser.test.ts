@@ -1,9 +1,11 @@
 import { mockReq, mockRes } from "sinon-express-mock";
 import * as winston from "winston";
-import { UserAuthMiddleware } from "./authUser";
+import { MakeAuthUserMiddleware } from "./authUser";
 import { LoadMethods, TestConnection } from "../../infra/repo";
-import { BuildMakeVerifyJwt } from "../../utils";
+import { BuildMakeVerifyJwt, VerifyToken } from "../../utils";
 import { AddUsers } from "../../infra/repo";
+import { AuthCommon } from "./authCommon";
+import { FindUserByUserId } from "../../user";
 
 // Avoid writing to logs during testing
 jest.mock("../../utils/logger.ts", () => {
@@ -28,13 +30,20 @@ const buildJwt = BuildMakeVerifyJwt.getInstance();
 const makeToken = buildJwt.makeToken;
 const goodToken = makeToken({
   id: "AGHxYB",
-  role: "User"
+  role: "User",
+  userAgent: "fake userAgent",
+  clientIp: "123.11.22.33"
 });
 
 const badToken = makeToken({
   id: "AAaaa1234",
-  role: "User"
+  role: "User",
+  userAgent: "fake userAgent",
+  clientIp: "123.11.22.33"
 });
+
+const authCommon = AuthCommon(VerifyToken, FindUserByUserId);
+const UserAuthMiddleware = MakeAuthUserMiddleware(authCommon);
 
 describe("Auth user middleware tests", () => {
   const next = () => null;
@@ -43,7 +52,6 @@ describe("Auth user middleware tests", () => {
   let status: any;
 
   beforeAll(async () => {
-    await TestConnection.createConnection();
     await LoadMethods();
     await AddUsers();
   }, 120000);
@@ -63,9 +71,11 @@ describe("Auth user middleware tests", () => {
   it("should get the right user in the request.user", async () => {
     const req = {
       headers: {
-        authorization: goodToken
+        authorization: goodToken,
+        ["user-agent"]: "fake userAgent"
       },
-      code: uuid
+      code: uuid,
+      clientIp: "123.11.22.33"
     };
     request = mockReq(req);
 

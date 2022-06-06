@@ -38,7 +38,6 @@ export const LiveConnection = (() => {
         await mongoClient.close();
         Logger.info("accounts DB closed");
       }
-    },
-    createConnection
+    }
   };
 })();
