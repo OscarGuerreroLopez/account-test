@@ -7,11 +7,10 @@ export const AddUserTransaction: Handler = async (
   response: Response
 ) => {
   try {
-    const result = await AddUserTransactionService(
-      request.body.currency,
-      request.user.userId,
-      request.body.amount
-    );
+    const { userId } = request.user;
+    const { currency, amount } = request.body;
+
+    const result = await AddUserTransactionService(currency, userId, amount);
 
     return response.status(200).send({
       result

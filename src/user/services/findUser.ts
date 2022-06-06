@@ -1,4 +1,4 @@
-import memoize from "fast-memoize";
+// import memoize from "fast-memoize";
 import { User } from "../entities";
 import { DbMethodsType } from "../../infra/repo";
 import { Logger } from "../../utils";
@@ -34,7 +34,7 @@ export const MakeFindUser = (
     }
   };
 
-  const findAllUsersOriginal = async () => {
+  const findAllUsers = async () => {
     try {
       const result = removePassword(
         await repo("users").find<User>({})
@@ -47,7 +47,7 @@ export const MakeFindUser = (
     }
   };
 
-  const findAllUsers = memoize(findAllUsersOriginal);
+  // const findAllUsers = memoize(findAllUsersOriginal);
 
   return { findUserByEmail, findAllUsers, findUserByUserId };
 };

@@ -5,7 +5,7 @@ import { LoginUser, LoginUserParams, MakeLoginUserParams } from "./interfaces";
 export const MakeLoginUser = ({
   repo,
   comparePassword,
-  makeToken
+  MakeToken
 }: MakeLoginUserParams): LoginUser => {
   const loginUser = async ({
     email,
@@ -39,7 +39,7 @@ export const MakeLoginUser = ({
       throw Error(`User with email ${email} wrong password`);
     }
 
-    const token = makeToken({
+    const token = MakeToken({
       id: user.userId,
       role: user.role,
       userAgent,

@@ -8,7 +8,10 @@ export const FindAccount: Handler = async (
 ) => {
   try {
     const currency = request.params.currency;
-    const result = await FindAccountService(request.user.userId, currency);
+
+    const { userId } = request.user;
+
+    const result = await FindAccountService(userId, currency);
 
     return response.status(200).send(result);
   } catch (error) {

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { BuildMakeVerifyJwt, ErrorHandler, Severity } from "../../utils";
+import { VerifyToken, ErrorHandler, Severity } from "../../utils";
 import { FindUserByUserId } from "../../user";
 
 export const UserAuthMiddleware = async (
@@ -16,9 +16,7 @@ export const UserAuthMiddleware = async (
       throw Error("missing token");
     }
 
-    const jwtInstance = BuildMakeVerifyJwt.getInstance();
-
-    const decoded = jwtInstance.verifyToken(token);
+    const decoded = VerifyToken(token);
 
     const user = await FindUserByUserId(decoded.id);
 
@@ -38,6 +36,18 @@ export const UserAuthMiddleware = async (
 
     if (decoded.userAgent !== userAgent || decoded.clientIp !== clientIp) {
       throw Error(`User ${decoded.id} has changed location`);
+    }
+
+    if (!user.name) {
+      throw new Error("name missing in user DB");
+    }
+
+    if (!user.email) {
+      throw new Error("email missing in user DB");
+    }
+
+    if (!user.userId) {
+      throw new Error("userId missing in user DB");
     }
 
     request.user = {
