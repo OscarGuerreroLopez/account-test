@@ -25,13 +25,6 @@ export const UserLoginValidator = [
     .withMessage("missing or invalid email")
 ];
 
-export const GetUserValidator = [
-  param("email")
-    .exists()
-    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)
-    .withMessage("missing or invalid email")
-];
-
 export const AddAccountValidator = [
   body("currency").exists().withMessage("Missing currency")
 ];

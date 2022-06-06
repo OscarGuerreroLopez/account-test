@@ -6,15 +6,7 @@ export const GetUser: Handler = async (
   response: Response
 ) => {
   try {
-    const email = request.params.email;
-
     const user = request.user;
-
-    if (user.email !== email) {
-      throw Error(
-        `User with email ${user.email} is trying to access info for user ${email}`
-      );
-    }
 
     return response.status(200).send(user);
   } catch (error) {
