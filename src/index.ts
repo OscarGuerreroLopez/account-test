@@ -9,6 +9,7 @@ import { EnvVars, Logger } from "./utils";
 import { LoadMethods, AddAdminUser, AddUsers } from "./infra/repo";
 
 const app = express();
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
