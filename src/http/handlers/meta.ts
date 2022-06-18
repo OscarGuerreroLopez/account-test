@@ -6,8 +6,7 @@ import { TestConnection } from "../../infra/repo";
 export const Meta: Handler = async (request: Request, response: Response) => {
   try {
     const end = HttpRequestTimer.startTimer();
-    const route = request.route.path;
-    console.log("@@@111", route);
+    const { requestRoute, requestMethod } = request;
 
     const dbConnection = await TestConnection.checkConnection();
 
@@ -15,7 +14,7 @@ export const Meta: Handler = async (request: Request, response: Response) => {
       message: "I am alive",
       dbConnection
     });
-    end({ route, method: request.method });
+    end({ route: requestRoute, method: requestMethod });
   } catch (error) {
     ErrorHandler({
       error,

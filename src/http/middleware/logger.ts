@@ -9,6 +9,8 @@ export const LoggerMiddleware = (
   next: NextFunction
 ): void => {
   try {
+    request.requestRoute = request.path;
+    request.requestMethod = request.method;
     request.code = uuidv4();
 
     ErrorHandler({
