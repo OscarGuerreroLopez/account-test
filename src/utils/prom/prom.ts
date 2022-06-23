@@ -7,8 +7,8 @@ import { counter } from "./counter";
 
 const prom = (() => {
   let register: client.Registry;
-  let httpRequestTimer: client.Histogram<"method" | "route" | "code">;
-
+  let httpRequestTimer: client.Histogram<"code" | "method" | "route">;
+  let dbRequestTimer: client.Histogram<"operation" | "success">;
   const makeRegister = () => {
     register = new client.Registry();
 
@@ -22,20 +22,13 @@ const prom = (() => {
 
     client.collectDefaultMetrics({ register });
 
-    // Create a histogram metric
-    httpRequestTimer = new client.Histogram({
-      name: "http_request_duration_seconds",
-      help: "Duration of HTTP requests in seconds",
-      labelNames: ["method", "route", "code"],
-      buckets: [0.1, 0.3, 0.5, 0.7, 1, 3, 5, 7, 10] // 0.1 to 10 seconds
-    });
-
-    register.registerMetric(httpRequestTimer);
-
     // Other custom metrics and its usage
 
     // other histograms
-    histogram(register);
+    const { clientHistogram, databaseResponseTimeHistogram } =
+      histogram(register);
+    httpRequestTimer = clientHistogram;
+    dbRequestTimer = databaseResponseTimeHistogram;
 
     // gauge
     gauge(register);
@@ -61,9 +54,17 @@ const prom = (() => {
       }
       Logger.info("returning prom httpRequestTimerinstance");
       return httpRequestTimer;
+    },
+    getDbTimer: () => {
+      if (!dbRequestTimer) {
+        makeRegister();
+      }
+
+      return dbRequestTimer;
     }
   };
 })();
 
 export const Prometheus = prom.getRegister();
 export const HttpRequestTimer = prom.getTimer();
+export const DbRequestTimer = prom.getDbTimer();

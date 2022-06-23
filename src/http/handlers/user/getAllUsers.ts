@@ -1,17 +1,22 @@
 import { Handler, Response, Request } from "express";
-import { ErrorHandler, Severity } from "../../../utils";
+import { ErrorHandler, Severity, HttpRequestTimer } from "../../../utils";
 import { FindAllUsers } from "../../../user";
 
 export const GetAllUsers: Handler = async (
   request: Request,
   response: Response
 ) => {
+  const { requestRoute, requestMethod } = request;
+
+  const end = HttpRequestTimer.startTimer();
+
   try {
     const result = await FindAllUsers();
 
-    return response.status(200).send({
+    response.status(200).send({
       result
     });
+    end({ route: requestRoute, method: requestMethod, code: 200 });
   } catch (error) {
     ErrorHandler({
       error,
@@ -24,8 +29,9 @@ export const GetAllUsers: Handler = async (
       }
     });
 
-    return response.status(500).send({
+    response.status(500).send({
       message: "Login issue, check logs"
     });
+    end({ route: requestRoute, method: requestMethod, code: 500 });
   }
 };

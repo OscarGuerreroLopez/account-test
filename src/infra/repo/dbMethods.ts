@@ -7,6 +7,7 @@ import {
   Transaction,
   TransactionRepo
 } from "./models";
+import { DbRequestTimer } from "../../utils";
 
 export interface InstanceModel {
   find: <T>(where: Partial<T>) => Promise<T[]>;
@@ -51,8 +52,12 @@ export const DbMethods = (collection: string): Readonly<InstanceModel> => {
 const loadModel = <T>(collection: Collection<T>): Readonly<InstanceModel> => {
   const methods = {
     find: async (where: Partial<T>) => {
+      const end = DbRequestTimer.startTimer();
       const result = await collection.find(where).toArray();
-
+      end({
+        operation: JSON.stringify(where),
+        success: "true"
+      });
       return Object.assign([], result); // just to make sure noone alters the original value
     },
     findOne: async (where: Partial<T>) => {
