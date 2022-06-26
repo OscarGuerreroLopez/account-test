@@ -8,6 +8,7 @@ export * from "./password";
 export * from "./jwt";
 export * from "./nanoUUID";
 export * from "./transactionUtil";
+export * from "./apm";
 
 import { BuildMakeVerifyJwt } from "./jwt";
 

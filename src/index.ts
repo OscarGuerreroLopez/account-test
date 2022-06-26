@@ -1,11 +1,16 @@
 import express from "express";
+
+import { EnvVars, Logger, APM } from "./utils";
+
+APM.getApm();
+
 import cors from "cors";
 import helmet from "helmet";
 import requestIp from "request-ip";
 
 import * as middleware from "./http/middleware";
 import Router from "./http/router";
-import { EnvVars, Logger } from "./utils";
+// import { EnvVars, Logger } from "./utils";
 import { LoadMethods, AddAdminUser, AddUsers } from "./infra/repo";
 
 const app = express();

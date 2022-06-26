@@ -1,11 +1,13 @@
 import { FindUserByUserIdType } from "../../user/services";
-import { VerifyTokenType } from "../../utils";
+import { VerifyTokenType, APM } from "../../utils";
 
 export type AuthCommonType = (
   token?: string,
   userAgent?: string | undefined,
   clientIp?: string | undefined
 ) => Promise<RequestUser>;
+
+const apm = APM.getApm();
 
 export const AuthCommon = (
   verifyToken: VerifyTokenType,
@@ -27,9 +29,13 @@ export const AuthCommon = (
       throw Error("missing client ip");
     }
 
+    apm.startTransaction("verifyToken", { startTime: Date.now() });
     const decoded = verifyToken(token);
+    apm.endTransaction("success verifyToken", Date.now());
 
+    apm.startTransaction("findCurrentUser", { startTime: Date.now() });
     const user = await findUserByUserId(decoded.id);
+    apm.endTransaction("success findCurrentUser", Date.now());
 
     if (Object.keys(user).length === 0) {
       throw Error(`User ${decoded.id} does not exist in DB`);

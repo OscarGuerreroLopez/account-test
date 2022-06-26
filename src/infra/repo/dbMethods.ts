@@ -1,4 +1,6 @@
 import { Collection, OptionalUnlessRequiredId } from "mongodb";
+
+import { APM } from "../../utils";
 import {
   UserRepo,
   User,
@@ -18,6 +20,7 @@ export interface InstanceModel {
 }
 
 const dbInstancesModels: Map<string, Readonly<InstanceModel>> = new Map();
+const apm = APM.getApm();
 
 export type DbMethodsType = (collection: string) => Readonly<InstanceModel>;
 
@@ -51,7 +54,9 @@ export const DbMethods = (collection: string): Readonly<InstanceModel> => {
 const loadModel = <T>(collection: Collection<T>): Readonly<InstanceModel> => {
   const methods = {
     find: async (where: Partial<T>) => {
+      apm.startTransaction("findMethod", { startTime: Date.now() });
       const result = await collection.find(where).toArray();
+      apm.endTransaction("success find", Date.now());
 
       return Object.assign([], result); // just to make sure noone alters the original value
     },

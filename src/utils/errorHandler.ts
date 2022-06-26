@@ -1,7 +1,7 @@
-import { Logger, SanitiseBody, SeverityType } from ".";
+import { Logger, SanitiseBody, Severity } from ".";
 
 export interface AdditionalErrorInfo {
-  severity: SeverityType;
+  severity: Severity;
   identifier: string;
   code?: string;
   body?: IObjectLiteral;
