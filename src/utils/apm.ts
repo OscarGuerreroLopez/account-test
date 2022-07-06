@@ -11,7 +11,7 @@ export const APM = (() => {
       serverUrl: EnvVars.APM_URL
     });
 
-    Logger.info("APM started");
+    Logger.info(`APM initial load === ${EnvVars.APM_ENABLE}`);
   };
 
   return {

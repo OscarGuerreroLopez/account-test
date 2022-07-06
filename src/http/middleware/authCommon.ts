@@ -49,7 +49,9 @@ export const AuthCommon = (
     }
 
     if (decoded.userAgent !== userAgent || decoded.clientIp !== clientIp) {
-      throw Error(`User ${decoded.id} has changed location`);
+      throw Error(
+        `User ${decoded.id} has changed location. Location in token is ${decoded.userAgent} and in request ${userAgent}. Ip in token is ${decoded.clientIp} and IP on request is ${clientIp}`
+      );
     }
 
     if (!user.name) {

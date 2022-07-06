@@ -66,7 +66,9 @@ const loadModel = <T>(collection: Collection<T>): Readonly<InstanceModel> => {
       return Object.assign({}, result); // just to make sure noone alters the original value
     },
     insert: async (record: OptionalUnlessRequiredId<T>): Promise<boolean> => {
+      apm.startTransaction("insertOne method", { startTime: Date.now() });
       await collection.insertOne(record);
+      apm.endTransaction("success insertOne", Date.now());
 
       return true;
     },
