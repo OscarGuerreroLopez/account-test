@@ -8,6 +8,13 @@ declare global {
     MONGO_USER: string;
     MONGO_PASSWORD: string;
     MONGO_URL: string;
+    REDIS_PORT: number;
+    REDIS_HOST: string;
+    ES_INDEX: string;
+    ES_NODE: string;
+    LOG_LEVEL: string;
+    APM_URL: string;
+    APM_ENABLE: boolean;
   }
 
   type IObjectLiteral = {

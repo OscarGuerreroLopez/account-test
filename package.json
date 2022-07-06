@@ -71,6 +71,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
+    "elastic-apm-node": "^3.36.0",
     "envalid": "^6.0.1",
     "express": "^4.17.3",
     "express-async-handler": "^1.2.0",
@@ -84,6 +85,7 @@
     "ts-money": "^0.4.7",
     "underscore": "^1.13.3",
     "uuid": "^8.3.2",
-    "winston": "^3.7.2"
+    "winston": "^3.7.2",
+    "winston-elasticsearch": "^0.15.0"
   }
 }

@@ -1,4 +1,4 @@
-import { cleanEnv, str, num } from "envalid";
+import { cleanEnv, str, num, bool } from "envalid";
 
 export enum NodeEnvEnum {
   DEVELOPMENT = "development",
@@ -13,7 +13,14 @@ const getEnvVars = (): EnvObject => {
     SECRET: str(),
     MONGO_USER: str(),
     MONGO_PASSWORD: str(),
-    MONGO_URL: str()
+    MONGO_URL: str(),
+    REDIS_PORT: num({ default: 6379 }),
+    REDIS_HOST: str({ default: "localhost" }),
+    ES_INDEX: str(),
+    ES_NODE: str(),
+    LOG_LEVEL: str(),
+    APM_URL: str(),
+    APM_ENABLE: bool({ default: false })
   });
 
   return EnvVars as EnvObject;
