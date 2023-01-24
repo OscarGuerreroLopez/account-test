@@ -1,4 +1,4 @@
-import { Collection, OptionalUnlessRequiredId } from "mongodb";
+import { Collection, Document, OptionalUnlessRequiredId } from "mongodb";
 import {
   UserRepo,
   User,
@@ -48,7 +48,9 @@ export const DbMethods = (collection: string): Readonly<InstanceModel> => {
   return instanceModel;
 };
 
-const loadModel = <T>(collection: Collection<T>): Readonly<InstanceModel> => {
+const loadModel = <T extends Document>(
+  collection: Collection<T>
+): Readonly<InstanceModel> => {
   const methods = {
     find: async (where: Partial<T>) => {
       const result = await collection.find(where).toArray();
