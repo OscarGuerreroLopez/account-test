@@ -70,7 +70,8 @@
     ],
     "modulePathIgnorePatterns": [
       "<rootDir>/dist/"
-    ]
+    ],
+    "globalSetup": "./src/infra/repo/seed/testSeeder.ts"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
