@@ -62,3 +62,5 @@ app.listen(EnvVars.PORT, async () => {
   await AddUsers();
   Logger.info(`Server is running on http://localhost:${EnvVars.PORT}...`);
 });
+
+export default app;
