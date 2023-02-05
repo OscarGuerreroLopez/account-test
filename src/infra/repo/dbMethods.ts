@@ -1,6 +1,5 @@
-import { Collection, OptionalUnlessRequiredId } from "mongodb";
-
 import { APM } from "../../utils";
+import { Collection, Document, OptionalUnlessRequiredId } from "mongodb";
 import {
   UserRepo,
   User,
@@ -51,7 +50,9 @@ export const DbMethods = (collection: string): Readonly<InstanceModel> => {
   return instanceModel;
 };
 
-const loadModel = <T>(collection: Collection<T>): Readonly<InstanceModel> => {
+const loadModel = <T extends Document>(
+  collection: Collection<T>
+): Readonly<InstanceModel> => {
   const methods = {
     find: async (where: Partial<T>) => {
       apm.startTransaction("findMethod", { startTime: Date.now() });
