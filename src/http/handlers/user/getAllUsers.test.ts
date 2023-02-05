@@ -1,7 +1,7 @@
 import { mockReq, mockRes } from "sinon-express-mock";
 import * as winston from "winston";
 import { GetAllUsers } from "./getAllUsers";
-import { LoadMethods, TestConnection } from "../../../infra/repo";
+import { AddUsers, LoadMethods, TestConnection } from "../../../infra/repo";
 
 // Avoid writing to logs during testing
 jest.mock("../../../utils/logger.ts", () => {
@@ -32,6 +32,7 @@ describe("getAll User test", () => {
 
   beforeAll(async () => {
     await LoadMethods();
+    await AddUsers();
   }, 120000);
 
   afterAll(async () => {
@@ -63,12 +64,30 @@ describe("getAll User test", () => {
   });
 
   it("Should get all users", async () => {
-    const requestResult = {
-      name: "User"
-    };
+    const requestResult = [
+      {
+        name: "User",
+        email: "user1@oscar.com",
+        role: "User",
+        userId: "AGHxYB"
+      },
+      {
+        name: "User",
+        email: "user2@oscar.com",
+        role: "User",
+        userId: "gbH_us"
+      }
+    ];
     await GetAllUsers(request, response, next);
+
+    const result = body.result;
+    const filteredResult = result.map(({ _id, ...rest }: any) => {
+      console.log("@@@all users test deleting id", _id);
+      return rest;
+    });
+
     expect(body).toBeDefined();
-    expect(body).toEqual(requestResult);
+    expect(filteredResult).toEqual(requestResult);
     expect(status).toBe(200);
   });
 });
