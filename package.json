@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles --testTimeout=80000 --forceExit",
+    "test": "NODE_ENV=test jest --detectOpenHandles --testTimeout=80000 --forceExit",
     "start:dev": "nodemon",
     "build": "rimraf ./dist && tsc",
     "start": "npm run build && node dist/index.js",

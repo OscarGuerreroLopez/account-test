@@ -8,4 +8,4 @@ import { LiveConnection } from "./liveConnection";
 import { TestConnection } from "./testConnection";
 
 export const Database =
-  EnvVars.NODE_ENV === "prod" ? LiveConnection : TestConnection;
+  EnvVars.NODE_ENV === "test" ? TestConnection : LiveConnection;

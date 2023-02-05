@@ -9,14 +9,6 @@ export const MakeAddUser = (
   const addUser = async (user: User) => {
     const validUser = MakeUser(user);
 
-    const userExists = await repo("users").findOne<User>({
-      email: validUser.getEmail()
-    });
-
-    if (Object.keys(userExists).length > 0) {
-      throw Error(`User with email ${validUser.getEmail()} already exists`);
-    }
-
     const hashPassword = await makePassword(validUser.getPassword());
 
     const result = await repo("users").insert<User>({
