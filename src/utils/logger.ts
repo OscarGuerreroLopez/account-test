@@ -40,7 +40,10 @@ Logger.on("error", (error) => {
   console.error("!!!!!!!!!!!!!!!!Logger Error caught", error);
 });
 
-if (EnvVars.NODE_ENV === NodeEnvEnum.DEVELOPMENT) {
+if (
+  EnvVars.NODE_ENV === NodeEnvEnum.DEVELOPMENT ||
+  EnvVars.NODE_ENV === NodeEnvEnum.TEST
+) {
   Logger.add(
     new winston.transports.Console({
       format: winston.format.simple()

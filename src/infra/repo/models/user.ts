@@ -9,7 +9,10 @@ export const UserRepo = (() => {
   const makeUserIntance = async () => {
     const db = await Database.getConnection();
     instance = db.collection<User>("users");
-    instance.createIndex({ email: 1 }, { unique: true, background: true });
+    await instance.createIndex(
+      { email: 1 },
+      { unique: true, background: true }
+    );
   };
 
   return {

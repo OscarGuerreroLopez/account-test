@@ -61,6 +61,7 @@ describe("user routes test", () => {
       password: "Abc123",
       email: "oscarlopez@gmail.com"
     };
+
     const response = await request(app)
       .post("/user/register")
       .set("accept", "*/*")
