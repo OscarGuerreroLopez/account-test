@@ -10,7 +10,7 @@ export const TestConnection = (() => {
     try {
       const replSet = await MongoMemoryReplSet.create({
         replSet: { storageEngine: "wiredTiger" },
-        binary: { version: "4.4.10" }
+        binary: { version: "latest" }
       });
 
       const replicaUri = replSet.getUri();
