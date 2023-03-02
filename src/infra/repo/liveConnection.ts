@@ -8,7 +8,7 @@ export const LiveConnection = (() => {
 
   const createConnection = async () => {
     try {
-      const uri = `mongodb+srv://${EnvVars.MONGO_USER}:${EnvVars.MONGO_PASSWORD}@${EnvVars.MONGO_URL}/?retryWrites=true&w=majority`;
+      const uri = `mongodb://${EnvVars.MONGO_USER}:${EnvVars.MONGO_PASSWORD}@${EnvVars.MONGO_URL}/?retryWrites=true&w=majority`;
 
       const options: MongoClientOptions = {
         maxPoolSize: 10,

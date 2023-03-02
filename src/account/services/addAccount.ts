@@ -6,17 +6,6 @@ export const MakeAddAccount = (repo: DbMethodsType): AddAccount => {
   const addAccount = async (account: Partial<Account>) => {
     const validAccount = MakeAccount(account);
 
-    const accountExists = await repo("accounts").findOne<Account>({
-      currency: validAccount.getCurrency(),
-      userId: validAccount.getUserId()
-    });
-
-    if (Object.keys(accountExists).length > 0) {
-      throw Error(
-        `User ${validAccount.getUserId()} already has an account in ${validAccount.getCurrency()}`
-      );
-    }
-
     const result = await repo("accounts").insert<Account>({
       accountId: validAccount.getAccountId(),
       userId: validAccount.getUserId(),

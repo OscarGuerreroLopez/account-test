@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import _ from "underscore";
 
 export type MakePassword = (plainPassword: string) => Promise<string>;

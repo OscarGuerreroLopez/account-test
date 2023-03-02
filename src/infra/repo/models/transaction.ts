@@ -9,7 +9,7 @@ export const TransactionRepo = (() => {
   const makeTransactionIntance = async () => {
     const db = await Database.getConnection();
     instance = db.collection<Transaction>("transactions");
-    instance.createIndex(
+    await instance.createIndex(
       { userId: 1, accountId: 1, transactionId: 1 },
       { unique: false, background: true }
     );
