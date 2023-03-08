@@ -85,6 +85,8 @@ Execute "post transaction" to add money or withdraw . If you withdraw please add
 It would have been ideal to include more test and integration test, there are some but not a 100% coverage.
 I included an in memory DB but the ideal thing would also be to have a real implementation. In Memory test is great for testing environments , like that we don't have to mock the Repo, we just use the inmemory one for the test
 
+Docker not running, will fix it when I have time
+
 ### finally
 
 I included some basic test with Jest here, again just for this test and the time I had I did not include a lot of tests.
