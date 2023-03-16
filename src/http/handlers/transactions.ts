@@ -1,6 +1,6 @@
 import { Handler, Response, Request } from "express";
 import { ErrorHandler, Severity } from "../../utils";
-import { AddUserTransaction as AddUserTransactionService } from "../../account";
+import { AddUserTransactionService } from "../../account";
 
 export const AddUserTransaction: Handler = async (
   request: Request,

@@ -1,4 +1,3 @@
-// import memoize from "fast-memoize";
 import { User } from "../entities";
 import { DbMethodsType } from "../../infra/repo";
 import { Logger } from "../../utils";
@@ -46,8 +45,6 @@ export const MakeFindUser = (
       throw new Error("Not able to find user");
     }
   };
-
-  // const findAllUsers = memoize(findAllUsersOriginal);
 
   return { findUserByEmail, findAllUsers, findUserByUserId };
 };

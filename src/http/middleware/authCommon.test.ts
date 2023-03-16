@@ -1,5 +1,4 @@
-import { LoadMethods, Database } from "../../infra/repo";
-import { AddUsers } from "../../infra/repo";
+import { LoadMethods, Database, AddUsers } from "../../infra/repo";
 import { AuthCommon } from "./authCommon";
 import { VerifyToken, MakeToken } from "../../utils";
 import { FindUserByUserId } from "../../user";
@@ -15,12 +14,6 @@ describe("authCommonTest", () => {
     await Database.closeConnection();
   }, 120000);
 
-  //   const token = MakeToken({
-  //     id: user.userId,
-  //     role: user.role,
-  //     userAgent,
-  //     clientIp
-  //   });
   it("Should work and return a user object", async () => {
     const token = MakeToken({
       id: "AGHxYB",

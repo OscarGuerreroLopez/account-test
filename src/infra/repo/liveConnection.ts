@@ -1,6 +1,5 @@
 import { Db, MongoClient, MongoClientOptions } from "mongodb";
-import { Logger } from "../../utils";
-import { EnvVars } from "../../utils";
+import { Logger, EnvVars } from "../../utils";
 
 export const LiveConnection = (() => {
   let mongoClient: MongoClient;

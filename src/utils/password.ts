@@ -30,14 +30,12 @@ export const BuildPassword = (saltRounds: number): MakeComparePassword => {
     items: T[] | T
   ): IObjectLiteral[] | IObjectLiteral => {
     if (Array.isArray(items)) {
-      const newArray = _.map(items as T[], (item: T) =>
-        _.omit(item, "password")
-      );
+      const newArray = _.map(items, (item: T) => _.omit(item, "password"));
 
       return newArray;
     }
 
-    return _.omit(items as T, "password");
+    return _.omit(items, "password");
   };
 
   return { makePassword, comparePassword, removePassword };

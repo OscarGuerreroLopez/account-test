@@ -3,7 +3,6 @@ export * from "./logger";
 export * from "./notFound.middleware";
 export * from "./validator.middleware";
 export * from "./authAdmin";
-// export * from "./authUser";
 
 import { AuthCommon } from "./authCommon";
 import { VerifyToken } from "../../utils";
