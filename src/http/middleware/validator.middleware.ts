@@ -12,7 +12,7 @@ export const ValidatorMiddleware = (
   if (!errors.isEmpty()) {
     let message = "";
 
-    errors.array().map((err) => {
+    errors.array().forEach((err) => {
       message += `${err.msg || ""} ,`;
     });
 

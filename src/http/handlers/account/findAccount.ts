@@ -1,6 +1,6 @@
 import { Handler, Response, Request } from "express";
 import { ErrorHandler, Severity } from "../../../utils";
-import { FindAccount as FindAccountService } from "../../../account";
+import { FindAccountService } from "../../../account";
 
 export const FindAccount: Handler = async (
   request: Request,

@@ -4,14 +4,19 @@ import { MakeFindAccount } from "./getAccount";
 import { MakeUpdateAccount } from "./updateAccount";
 import { Maketransaction } from "./transaction";
 
-export const AddAccount = MakeAddAccount(DbMethods);
-export const FindAllAccounts = MakeFindAccount(DbMethods).findAllAccounts;
-export const FindAccount = MakeFindAccount(DbMethods).findAccount;
-export const UpdateUserAccount = MakeUpdateAccount(DbMethods);
-export const AddUserTransaction = Maketransaction(
+export const AddAccountService = MakeAddAccount(DbMethods);
+
+export const {
+  findAllAccounts: FindAllAccountsService,
+  findAccount: FindAccountService
+} = MakeFindAccount(DbMethods);
+
+export const UpdateUserAccountService = MakeUpdateAccount(DbMethods);
+
+export const AddUserTransactionService = Maketransaction(
   DbMethods,
-  FindAccount,
-  UpdateUserAccount
+  FindAccountService,
+  UpdateUserAccountService
 );
 
 export * from "./interfaces";

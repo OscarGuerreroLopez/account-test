@@ -1,7 +1,5 @@
 import * as winston from "winston";
-
-import { EnvVars } from "./validateEnv";
-import { NodeEnvEnum } from "./validateEnv";
+import { EnvVars, NodeEnvEnum } from "./validateEnv";
 
 const { combine, timestamp, prettyPrint } = winston.format;
 

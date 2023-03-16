@@ -1,7 +1,12 @@
 import * as winston from "winston";
 import { Maketransaction } from "./transaction";
-import { LoadMethods, TestConnection, DbMethods } from "../../infra/repo";
-import { AddUsers, AddTestAccount } from "../../infra/repo";
+import {
+  LoadMethods,
+  TestConnection,
+  DbMethods,
+  AddUsers,
+  AddTestAccount
+} from "../../infra/repo";
 import { MakeFindAccount } from "./getAccount";
 import { MakeUpdateAccount } from "./updateAccount";
 import { UpdateUserAccount } from "./interfaces";

@@ -1,9 +1,8 @@
 import { mockReq, mockRes } from "sinon-express-mock";
 import * as winston from "winston";
 import { MakeAuthUserMiddleware } from "./authUser";
-import { LoadMethods, TestConnection } from "../../infra/repo";
+import { LoadMethods, TestConnection, AddUsers } from "../../infra/repo";
 import { BuildMakeVerifyJwt, VerifyToken } from "../../utils";
-import { AddUsers } from "../../infra/repo";
 import { AuthCommon } from "./authCommon";
 import { FindUserByUserId } from "../../user";
 

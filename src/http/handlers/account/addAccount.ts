@@ -1,6 +1,6 @@
 import { Handler, Response, Request } from "express";
 import { ErrorHandler, Severity } from "../../../utils";
-import { AddAccount as AddAccountService } from "../../../account";
+import { AddAccountService } from "../../../account";
 
 export const AddAccount: Handler = async (
   request: Request,
