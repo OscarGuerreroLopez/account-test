@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "4d58d58a-a9d6-4270-be10-1519f8bddcec",
+		"_postman_id": "d30deb16-515a-483a-a51f-a0a2bd921851",
 		"name": "grover",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19235779"
 	},
 	"item": [
 		{
@@ -30,7 +31,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Oscar\",\n    \"password\": \"Abc123\",\n    \"email\": \"oscar@gmail.com\"\n}",
+					"raw": "{\n    \"name\": \"Oscar\",\n    \"password\": \"Abc123\",\n    \"email\": \"oscarlopez@gmail.com\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -53,12 +54,24 @@
 		},
 		{
 			"name": "user login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n     \"email\": \"user1@oscar.com\",\n    \"password\": \"Abc123\"\n}",
+					"raw": "{\n     \"email\": \"oscarlopez@gmail.com\",\n    \"password\": \"Abc123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -113,17 +126,20 @@
 				"disableBodyPruning": true
 			},
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkFHSHhZQiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjUzNzI2MzAzLCJleHAiOjE2NTU3OTk5MDN9.ma1vRVUMikdp8ME5gvvrLuduuutLOfwoIgyqJhxUCBg",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Oscar\",\n    \"password\": \"Abc123\",\n    \"email\": \"oscar@gmail.com\"\n}",
+					"raw": "{\n    \"name\": \"Oscar\",\n    \"password\": \"Abc123\",\n    \"email\": \"oscarlopez@gmail.com\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -131,14 +147,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5002/user/user1@oscar.com",
+					"raw": "localhost:5002/user/oscar@gmail.com",
 					"host": [
 						"localhost"
 					],
 					"port": "5002",
 					"path": [
 						"user",
-						"user1@oscar.com"
+						"oscar@gmail.com"
 					]
 				}
 			},
@@ -154,7 +170,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRIY2ZRdCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY1NDA3MTE4NywiZXhwIjoxNjU2MTQ0Nzg3fQ.M1yClIfgzF1csykzgDVRIADbIAoEZu18d-PASnOgE6k",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -181,6 +197,18 @@
 		},
 		{
 			"name": "admin login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -214,7 +242,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkFHSHhZQiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjUzODQ4NjYwLCJleHAiOjE2NTU5MjIyNjB9.KCyewt6HfuhbD7E863IoJR5IrAdTDjV5McIdii4AK5I",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -251,7 +279,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkFHSHhZQiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjUzOTc5MjM1LCJleHAiOjE2NTYwNTI4MzV9.Ic7wC1haSMmUz2g_kOAMsVWiojww_sctOZAcOVZjFSw",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -285,19 +313,19 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkFHSHhZQiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjUzOTc5MjM1LCJleHAiOjE2NTYwNTI4MzV9.Ic7wC1haSMmUz2g_kOAMsVWiojww_sctOZAcOVZjFSw",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:5002/account/EUR",
+					"raw": "localhost:5002/account/USD",
 					"host": [
 						"localhost"
 					],
 					"port": "5002",
 					"path": [
 						"account",
-						"EUR"
+						"USD"
 					]
 				}
 			},
@@ -310,13 +338,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkFHSHhZQiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjUzODE5NDAyLCJleHAiOjE2NTU4OTMwMDJ9.hBnVy6Z5fbsLqTKgeQBOxA4nJqJxz_x8l7sIFrvp-ag",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"currency\": \"EUR\",\n    \"amount\": 10\n}",
+					"raw": "{\n    \"currency\": \"USD\",\n    \"amount\": 12\n}",
 					"options": {
 						"raw": {
 							"language": "json"
